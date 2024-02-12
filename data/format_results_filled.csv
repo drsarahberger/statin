@@ -1,0 +1,28 @@
+formatted_name,feature,level,keep,order
+Age — yr,age_yr,,1,1
+Body-mass index,body_mass_index,,1,4
+,sex,Female,,
+Male sex — no. (%),sex,Male,1,2
+,race,other,,
+White race — no. (%),race,white,1,3
+,diabetes,0,,
+Diabetes — no. (%),diabetes,1,1,5
+,hypertension,0,,
+Hypertension — no. (%),hypertension,1,1,6
+,current_smoking,0,,
+Current smoking — no. (%),current_smoking,1,1,7
+,previous_mi,0,,
+Previous MI — no. (%),previous_mi,1,1,8
+,previous_pci,0,,
+Previous PCI — no. (%),previous_pci,1,1,9
+,prior_statin_use,0,,
+Prior statin use — no. (%),prior_statin_use,1,1,10
+,antiplatelet_agent,0,,
+Concomitant medications — no. (%),,,1,11
+Antiplatelet agent,antiplatelet_agent,1,1,12
+,beta_blocker,0,,
+Beta-blocker,beta_blocker,1,1,13
+,ace_inhibitor,0,,
+Ace inhibitor,ace_inhibitor,1,1,14
+,angiotensin_receptor_blocker,0,,
+Angiotensin-receptor blocker,angiotensin_receptor_blocker,1,1,15
