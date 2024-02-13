@@ -95,3 +95,4 @@ data_frame_rosuvastatine <- data.frame(group = "rosuvastatin",age_yr, body_mass_
 
 # Display
 df_final <- rbind(data_frame_atorvastatine, data_frame_rosuvastatine)
+write.csv(df_final, "data/simulated_statin_dataset.csv", row.names = FALSE)

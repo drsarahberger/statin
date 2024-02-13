@@ -6,7 +6,7 @@
 # Load table
 
 getwd()
-d <- read.csv("C://Users/sarah.ITAI-SARA/OneDrive/Documents/code_with_me/project_1/data/simulated_combined_dataset_final.csv")
+d <- read.csv("C:/Users/sarah/Documents/professionnel_study/code_with_me/statin/data/simulated_statin_dataset.csv")
 head(d)
 summary(d)
 str(d)
@@ -24,8 +24,8 @@ apply(is.na(d), 2, sum)
 names(d)
 head(d)
 table(d$group)
-# Keep group Atorvastatin
-d_sub <- d[d$group=="Atorvastatin",]
+# Keep group atorvastatin
+d_sub <- d[d$group=="atorvastatin",]
 head(d_sub)
 dim(d_sub)
 table(d_sub$group)
@@ -34,16 +34,16 @@ table(d_sub$group)
 # quantitative variables
 # In method, continuous in mean and sd for normally distributed, 
 # otherwise medians and interquartile range
-hist(d_sub$Age.yr)
-hist(d_sub$Body.mass.index)
+hist(d_sub$age_yr)
+hist(d_sub$body_mass_index)
 
-mean(d_sub$Age.yr)
-round(mean(d_sub$Age.yr), 1)
-sd(d_sub$Age.yr)
-round(sd(d_sub$Age.yr),1)
+mean(d_sub$age_yr)
+round(mean(d_sub$age_yr), 1)
+sd(d_sub$age_yr)
+round(sd(d_sub$age_yr),1)
 
-round(mean(d_sub$Body.mass.index), 1)
-round(sd(d_sub$Body.mass.index),1)
+round(mean(d_sub$body_mass_index), 1)
+round(sd(d_sub$body_mass_index),1)
 
 # qualitative variables
 #Nothing in method
@@ -51,30 +51,30 @@ round(sd(d_sub$Body.mass.index),1)
 d_sub$sex
 table(d_sub$sex)[2]
 round(prop.table(table(d_sub$sex))*100, 1)[2]
-table(d_sub$Diabetes)[2]
-round(prop.table(table(d_sub$Diabetes))*100, 1)[2]
-table(d_sub$Hypertension)[2]
-round(prop.table(table(d_sub$Hypertension))*100, 1)[2]
-table(d_sub$Current.smoking)[2]
-round(prop.table(table(d_sub$Current.smoking))*100, 1)[2]
-table(d_sub$Previous.MI)[2]
-round(prop.table(table(d_sub$Previous.MI))*100, 1)[2]
-table(d_sub$Previous.PCI)[2]
-round(prop.table(table(d_sub$Previous.PCI))*100, 1)[2]
+table(d_sub$diabetes)[2]
+round(prop.table(table(d_sub$diabetes))*100, 1)[2]
+table(d_sub$hypertension)[2]
+round(prop.table(table(d_sub$hypertension))*100, 1)[2]
+table(d_sub$current_smoking)[2]
+round(prop.table(table(d_sub$current_smoking))*100, 1)[2]
+table(d_sub$previous_mi)[2]
+round(prop.table(table(d_sub$previous_mi))*100, 1)[2]
+table(d_sub$previous_pci)[2]
+round(prop.table(table(d_sub$previous_pci))*100, 1)[2]
 
 # Same with other group
 table(d$group)
-d_sub <- d[d$group=="Rosuvastatin",]
-hist(d_sub$Age.yr)
-hist(d_sub$Body.mass.index)
+d_sub <- d[d$group=="rosuvastatin",]
+hist(d_sub$age_yr)
+hist(d_sub$body_mass_index)
 
-round(mean(d_sub$Age.yr), 1)
-round(sd(d_sub$Age.yr),1)
+round(mean(d_sub$age_yr), 1)
+round(sd(d_sub$age_yr),1)
 
-round(mean(d_sub$Body.mass.index), 1)
-round(sd(d_sub$Body.mass.index),1)
+round(mean(d_sub$body_mass_index), 1)
+round(sd(d_sub$body_mass_index),1)
 
-t.test(d$Age.yr~d$group, paired=FALSE, var.equal=TRUE)
+t.test(d$age_yr~d$group, paired=FALSE, var.equal=TRUE)
 chi2 <- chisq.test(table(d$sex, d$group), correct = FALSE)
 chi2$expected
 
@@ -84,28 +84,28 @@ install.packages("table1")
 library(table1)
 #https://cran.r-project.org/web/packages/table1/vignettes/table1-examples.html
 
-d <- read.csv("C://Users/sarah.ITAI-SARA/OneDrive/Documents/code_with_me/project_1/data/simulated_combined_dataset_final.csv")
+d <- read.csv("C:/Users/sarah/Documents/professionnel_study/code_with_me/statin/data/simulated_statin_dataset.csv")
 
 colnames(d)
-table1(~ Age.yr + factor(sex) + factor(race) | group, data=d, overall = NULL)
+table1(~ age_yr + factor(sex) + factor(race) | group, data=d, overall = NULL)
 
 # Modify feature column
 d$sex <- factor(d$sex)
 d$race <- factor(d$race)
-label(d$Age.yr) <- "Age"
-units(d$Age.yr) <- "yr"
+label(d$age_yr) <- "Age"
+units(d$age_yr) <- "yr"
 label(d$sex) <- "Sex"
 units(d$sex) <- "no. (%)"
 label(d$race) <- "White race"
 units(d$race) <-  "no. (%)"
-table1(~ Age.yr + sex + race | group, data=d, overall = NULL)
+table1(~ age_yr + sex + race | group, data=d, overall = NULL)
 
 # Modify the stat for continuous
 my.render.cont <- function(x) {
   with(stats.apply.rounding(stats.default(x), digits=2), c("",
                                                            "Mean (SD)"=sprintf("%s (&plusmn; %s)", MEAN, SD)))
 }
-table1(~ Age.yr + sex + race | group, data=d, overall = NULL, render.continuous=my.render.cont)
+table1(~ age_yr + sex + race | group, data=d, overall = NULL, render.continuous=my.render.cont)
 
 # Add p.value
 pvalue <- function(x, ...) {
@@ -124,7 +124,7 @@ pvalue <- function(x, ...) {
   c("", sub("<", "&lt;", format.pval(p, digits=3, eps=0.001)))
 }
 
-table1(~ Age.yr + sex + race | group, data=d, overall = NULL, 
+table1(~ age_yr + sex + race | group, data=d, overall = NULL, 
        render.continuous=my.render.cont,
        extra.col = list(`P-value`=pvalue)
        )
@@ -156,8 +156,8 @@ is_quantitative <- function(column) {
 describe_2groups <- function(data, group_column, group1_name, group2_name){
   # data = d
   # group_column = "group"
-  # group1_name = "Atorvastatin"
-  # group2_name = "Rosuvastatin"
+  # group1_name = "atorvastatin"
+  # group2_name = "rosuvastatin"
   quantitative_cols <- sapply(data, is_quantitative)
   qualitative_cols <- !quantitative_cols
   qualitative_cols[group_column] <- FALSE
@@ -195,7 +195,7 @@ describe_2groups <- function(data, group_column, group1_name, group2_name){
   return(all_results)  
 }
 
-all_results <- describe_2groups(data = d, group_column = "group",group1_name = "Atorvastatin", group2_name = "Rosuvastatin")
+all_results <- describe_2groups(data = d, group_column = "group",group1_name = "atorvastatin", group2_name = "rosuvastatin")
 
 #Export features and level to format names
 format_df <- data.frame(formatted_name = "", feature = all_results$feature, level = all_results$level)
@@ -208,4 +208,4 @@ df_format <- df_format[order(df_format$order), ]
 
 table1 <- merge(df_format, all_results, by = c("feature", "level"), all.x = TRUE)
 table1 <- table1[order(table1$order),]
-table1[,c("formatted_name", "Atorvastatin", "Rosuvastatin")]
+table1[,c("formatted_name", "atorvastatin", "rosuvastatin")]
